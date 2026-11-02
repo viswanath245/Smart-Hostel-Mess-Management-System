@@ -1,0 +1,18 @@
+SMART HOSTEL MESS MANAGEMENT SYSTEM — MYSQL CONVERSION
+
+I edited the backend in this copy to use MySQL instead of MongoDB. The existing controller and route files are retained and a SQL-backed compatibility model layer preserves most of the Mongoose-style calls.
+
+SETUP
+1. Install MySQL Server and open MySQL Workbench.
+2. Open backend/schema.sql and execute the entire script. It creates smart_hostel_mess and the project tables.
+3. Open backend/.env and set MYSQL_PASSWORD to your local MySQL password. Set JWT_SECRET to the same secret your previous app used if you need existing JWT tokens to remain valid; do not publish it.
+4. In terminal, enter the backend folder and run: npm install
+5. Run: npm run dev
+6. Open http://localhost:5000/
+
+NOTES
+- No MongoDB installation or server is needed.
+- This conversion uses numeric MySQL IDs; frontend/API code continues to receive _id aliases from the model adapter for compatibility.
+- Existing MongoDB data is not automatically migrated. The new database starts empty.
+- Test student, staff and admin auth plus each route in the UI. MySQL ENUM constraints can reject values not matching the original model enums.
+- The MySQL compatibility layer supports basic find/findOne/findById/create/countDocuments, sort, select, populate, save, updates, deletes, $or, $inc and the report aggregation patterns currently used. Review all features with real test data before deployment.
